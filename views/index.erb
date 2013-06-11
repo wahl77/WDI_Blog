@@ -1,0 +1,20 @@
+<h1> My Amazing blogger </h1>
+
+<table>
+  <thead>
+    <tr>
+    <th>Poster</th><th>Title</th><th>Tags</th><th>Date</th>
+    </tr>
+  </thead>
+  <% @posts.each do |post| %>
+  
+  <tr>
+    <td><%= post.author.name %></td>
+    <td><a href="/post/view/<%=post.id%>"><%= post.title %></a></td>
+    <td><%= post.get_tags %></td>
+    <td><%= post.post_time %> </td>
+    
+  </tr>
+  
+  <% end %>
+</table>

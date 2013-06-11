@@ -1,0 +1,33 @@
+<h1> <%= @post.title %></h1>
+<h3> By <%= @post.author.name %> on <%= @post.post_time %></h3>
+
+It has the following tags:
+<%= @post.get_tags %>
+<br>
+
+Text is :<br>
+<%= @post.content %>
+
+
+<h3>---Post a comment ---</h3>
+<form method="post" action="/comment/add">
+<input type="hidden" value="<%= @post.id %>" name="comment[post_id]">
+<select name="comment[author_id]">
+  <% Author.all.each do |author| %>
+  <option name="comment[author_id]" value="<%= author.id %>"><%= author.name %></option>
+  <% end%>
+</select>
+<textarea name="comment[content]"></textarea>
+<button>Submit</button>
+</form>
+
+<h2> --- Viewed <%= @post.num_views %> ---- </h2>
+
+<% @post.comments.order("comment_time DESC").each do |comment|%>
+<article>
+  <p><%= comment.content %></p>
+  <p>by <%= comment.author.name %> on <%= comment.comment_time %></p>
+</article>
+-------
+<% end %>
+
